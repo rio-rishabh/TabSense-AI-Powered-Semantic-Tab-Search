@@ -1,0 +1,42 @@
+# Java / Gradle (backend)
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+*.jar
+*.war
+*.class
+*.log
+out/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env and secrets (API keys, etc.)
+.env
+.env.local
+*.pem
+
+# Extension (future)
+node_modules/
+dist/
+*.crx
+*.pem
+
+# Playwright
+playwright-report/
+test-results/
+blob-report/
+storage-state/
+
+# Misc
+*.bak
+*.tmp
