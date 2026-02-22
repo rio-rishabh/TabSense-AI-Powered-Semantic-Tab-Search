@@ -1,0 +1,5 @@
+server:
+  port: 8080
+
+gemini:
+  api-key: ${GEMINI_API_KEY}

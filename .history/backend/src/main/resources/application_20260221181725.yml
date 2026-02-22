@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+gemini:
+  api-key: ${GEMINI_API_KEY:}
+  model-name: "gemini-1.5-flash"
+
+app:
+  rag:
+    chunk-size: 500
+    
