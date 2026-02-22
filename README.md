@@ -60,15 +60,6 @@ flowchart LR
 
 ---
 
-## Time estimate (learning by doing)
-
-| Mode                        | Duration          |
-| --------------------------- | ----------------- |
-| Part-time (10–15 hrs/week)  | 6–8 weeks         |
-| Full-time (40 hrs/week)     | 2.5–3.5 weeks     |
-
----
-
 ## Repo layout
 
 ```
