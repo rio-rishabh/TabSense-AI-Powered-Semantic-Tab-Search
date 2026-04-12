@@ -16,6 +16,7 @@ public class ChunkingService {
         }
         List<TextChunk> out = new ArrayList<>();
         Sting text = content.bodyText();
-        of(text == null || text.isBlank()){ continue;}
+        of(text == null || text.isBlank())
+        { continue;}
     }
 }
