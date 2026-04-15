@@ -1,0 +1,24 @@
+type Query {
+  search(query: String!): SearchResult!
+}
+
+type Mutation {
+  syncTabs(tabs: [TabInput!]!): Boolean!
+}
+
+input TabInput {
+  url: String!
+  title: String!
+  tabId: String!
+}
+
+type SearchResult {
+  answer: String!
+  citations: [Citation!]!
+}
+
+type Citation {
+  tabId: String!
+  url: String!
+  snippet: String!
+}
