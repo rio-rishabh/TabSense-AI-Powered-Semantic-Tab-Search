@@ -16,6 +16,12 @@ repositories {
     mavenCentral()
 }
 
+springBoot {
+    // Gradle couldn't auto-detect the main class for bootRun in this project,
+    // so we set it explicitly.
+    mainClass = 'com.contextswitcher.ContextSwitcherApplication'
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
