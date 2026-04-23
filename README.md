@@ -33,7 +33,7 @@ flowchart LR
   REST --> Redis
   Redis -->|"miss"| RAG
   RAG --> VecDB
-  RAG -->|"Gemini Flash"| LLM[Gemini 1.5 Flash]
+  RAG -->|"OpenRouter chat generation"| LLM[OpenRouter LLM]
   GraphQL -->|"answer + tabId"| Ext
 ```
 
@@ -43,7 +43,7 @@ flowchart LR
 ### Data flow
 
 1. **Sync:** User clicks “Sync Tabs” → extension sends URLs + tabIds → backend scrapes with Playwright → chunks text → embeds (LangChain4j) → stores in vector DB with metadata (url, tabId).
-2. **Search:** User types a question → extension sends query via GraphQL → backend checks Redis; on miss → embeds query → vector search (top-k chunks) → Gemini Flash with context → answer + citations → cache and return. Extension shows answer and “Jump to tab” for each citation.
+2. **Search:** User types a question → extension sends query via GraphQL → backend checks Redis; on miss → embeds query → vector search (top-k chunks) → OpenRouter chat completion with retrieved context → answer + citations → cache and return. Extension shows answer and “Jump to tab” for each citation.
 
 ---
 
@@ -55,7 +55,7 @@ flowchart LR
 | Backend              | Java 21, Spring Boot 3.x, Gradle (wrapper, Groovy DSL)                                  |
 | Scraping             | Playwright for Java (headless Chromium)                                                |
 | API                  | GraphQL (Spring for GraphQL, primary); OpenAPI/Swagger (REST spec + Swagger UI)         |
-| RAG & LLM            | LangChain4j, Gemini 1.5 Flash, embedding model                                         |
+| RAG & LLM            | OpenRouter (natural-language generation), Gemini embeddings (`gemini-embedding-001`)   |
 | Vector DB            | ChromaDB (local/Docker)                                                                |
 | Cache                | Redis (local/Docker)                                                                   |
 
@@ -93,7 +93,7 @@ ContextSwitcher/
 
 ### Phase 1: Java backend core (Playwright + RAG + vector DB)
 
-- **Goal:** Spring Boot app that accepts tab URLs, scrapes with Playwright, chunks text, embeds and stores in a vector DB, and answers search queries via RAG (Gemini Flash).
+- **Goal:** Spring Boot app that accepts tab URLs, scrapes with Playwright, chunks text, embeds and stores in a vector DB, and answers search queries via RAG (OpenRouter generation + Gemini embeddings).
 - **Steps:** Gradle + DTOs → PlaywrightScraperService → ChunkingService → vector store (ChromaDB or in-memory) → RagService → GraphQL (syncTabs, search).
 - **Done when:** You can sync tab URLs and run a search query and get an answer with citations (tabId, url, snippet).
 
@@ -109,7 +109,7 @@ ContextSwitcher/
 
 ### Phase 4: Integration and polish
 
-- Docker Compose for backend + Redis + ChromaDB; privacy notice (localhost, data to Gemini); token/chunk limits; learning checkpoints.
+- Docker Compose for backend + Redis + ChromaDB; privacy notice (localhost, data sent to configured model providers); token/chunk limits; learning checkpoints.
 
 ---
 
@@ -125,7 +125,8 @@ ContextSwitcher/
 
 ```bash
 cd backend
-export GEMINI_API_KEY=your-key   # no spaces around =
+export GEMINI_API_KEY=your-gemini-key          # for embeddings
+export OPENROUTER_API_KEY=your-openrouter-key  # for natural-language generation
 ./gradlew bootRun
 ```
 
