@@ -38,4 +38,7 @@ dependencies {
 
     // ChromaDB via Http(use in memmory store first)
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // Redis (optional search result cache; enable with app.cache.redis.enabled=true)
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
