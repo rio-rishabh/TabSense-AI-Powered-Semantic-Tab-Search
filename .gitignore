@@ -7,11 +7,13 @@ build/
 *.class
 *.log
 out/
+backend/bin/
 
 # IDE
 .idea/
 *.iml
 .vscode/
+.history/
 *.swp
 *.swo
 *~
@@ -40,3 +42,5 @@ storage-state/
 # Misc
 *.bak
 *.tmp
+
+.history/
