@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Context Switcher",
+  "description": "Sync open tabs to your Context Switcher backend and ask questions with citations.",
+  "version": "0.1.0",
+  "action": {
+    "default_title": "Context Switcher",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["tabs", "storage"],
+  "host_permissions": ["http://localhost/*", "http://127.0.0.1/*"]
+}
