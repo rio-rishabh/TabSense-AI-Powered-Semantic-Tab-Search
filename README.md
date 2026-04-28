@@ -1,4 +1,5 @@
 
+
 # Context-Switcher
 
 **An AI-powered Chrome extension with a Java (Spring Boot) backend** — semantic search across your open browser tabs. Ask questions (e.g. “Which tab had the API pricing?”) and get answers with citations and “Jump to tab.”
