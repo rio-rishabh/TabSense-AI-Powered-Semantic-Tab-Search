@@ -13,10 +13,25 @@ openrouter:
   base-url: "https://openrouter.ai/api/v1"
   model: "openai/gpt-4o-mini"
   temperature: 0.2
+spring:
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
 app:
+  cache:
+    redis:
+      enabled: ${CACHE_REDIS_ENABLED:false}
+      ttl-seconds: ${CACHE_REDIS_TTL_SECONDS:600}
+      key-prefix: "ctxswitch"
   rag:
     chunk-size: 500
     top-k: 5
+    # Space Gemini document embed calls during sync to reduce 429 bursts (0 = off).
+    embed-chunk-delay-ms: 120
+    gemini-embed-max-attempts: 8
+    gemini-embed-initial-backoff-ms: 900
   scraper:
     page-timeout: 30000
     max-concurrent-pages: 5
