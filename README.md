@@ -1,6 +1,4 @@
-
-
-# Context-Switcher
+# ++**[TabSense-AI-Powered-Semantic-Tab-Search](https://github.com/rio-rishabh/TabSense-AI-Powered-Semantic-Tab-Search)**++
 
 **An AI-powered Chrome extension with a Java (Spring Boot) backend** — semantic search across your open browser tabs. Ask questions (e.g. “Which tab had the API pricing?”) and get answers with citations and “Jump to tab.”
 
@@ -38,6 +36,8 @@ flowchart LR
   GraphQL -->|"answer + tabId"| Ext
 ```
 
+
+
 - **Extension (TypeScript):** Collects open tab URLs and tab IDs, sends sync/search over **GraphQL** (only the fields it needs, e.g. `answer` and `citations { tabId url snippet }`), shows results and “Jump to tab.” Popup state (last question/answer/citations) is persisted across popup close/reopen.
 - **Java backend:** **Gradle (wrapper)** for build. **GraphQL** is the primary API; **OpenAPI/Swagger** documents the REST surface. Playwright for Java scrapes URLs; Spring Boot + LangChain4j handle RAG; Redis caches search results.
 
@@ -50,15 +50,17 @@ flowchart LR
 
 ## Tech stack
 
-| Layer                | Technology                                                                              |
-| -------------------- | --------------------------------------------------------------------------------------- |
-| Extension UI & logic | TypeScript, Tailwind, Manifest V3                                                       |
-| Backend              | Java 21, Spring Boot 3.x, Gradle (wrapper, Groovy DSL)                                  |
-| Scraping             | Playwright for Java (headless Chromium)                                                |
-| API                  | GraphQL (Spring for GraphQL, primary); OpenAPI/Swagger (REST spec + Swagger UI)         |
-| RAG & LLM            | OpenRouter (natural-language generation), Gemini embeddings (`gemini-embedding-001`)   |
-| Vector DB            | In-memory vector store (`VectorStore`)                                                  |
-| Cache                | Redis (local/Docker)                                                                   |
+
+| Layer                | Technology                                                                           |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| Extension UI & logic | TypeScript, Tailwind, Manifest V3                                                    |
+| Backend              | Java 21, Spring Boot 3.x, Gradle (wrapper, Groovy DSL)                               |
+| Scraping             | Playwright for Java (headless Chromium)                                              |
+| API                  | GraphQL (Spring for GraphQL, primary); OpenAPI/Swagger (REST spec + Swagger UI)      |
+| RAG & LLM            | OpenRouter (natural-language generation), Gemini embeddings (`gemini-embedding-001`) |
+| Vector DB            | In-memory vector store (`VectorStore`)                                               |
+| Cache                | Redis (local/Docker)                                                                 |
+
 
 ---
 
@@ -161,3 +163,4 @@ The backend includes retries/backoff for Gemini embedding calls plus optional pa
 - `app.rag.embed-chunk-delay-ms` (default `120`)
 - `app.rag.gemini-embed-max-attempts` (default `8`)
 - `app.rag.gemini-embed-initial-backoff-ms` (default `900`)
+
